@@ -1,0 +1,29 @@
+{smcl}
+{* 19jun2015}{...}
+{hline}
+help for {hi:sms} {right:manual:  {hi:[R] none}}
+{right:dialog:  {hi: none}    }
+{hline}
+
+{title:Syntax}
+
+{p 8 17 2}{cmd:sms} nr "message"{p_end}
+
+{title:Description}
+
+{p 4 4 2}{cmd:sms} This program sends an SMS using the Clickatell service.{p_end}
+
+{title:Example}
+
+{p 4 4 2}{cmd:sms} 46723169595 "Programme finished" {p_end}
+
+{title:Author}
+
+{p 4 4 2}
+Jonas Ranstam PhD {break}
+Mdas AB Rotfruktsgatan 12B, Ystad, Sweden, {break}
+http://www.ranstam.se, jonas.ranstam@gmail.com{p_end}
+
+
+
+

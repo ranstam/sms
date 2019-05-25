@@ -1,0 +1,54 @@
+#!/usr/bin/php
+
+<?php
+    error_reporting (0);
+
+    $user     = "";
+    $password = "";
+    $api_id   = "";
+    $from     = "";
+    $baseurl  ="https://api.clickatell.com";
+ 
+    $to = $argv[1];
+    $text="";
+    $i = 2;
+    while(!empty($argv[$i])){
+        $text=$text." ".$argv[$i];
+        $i=$i+1;
+    }
+    $text=urlencode(utf8_decode(trim($text)));
+
+    if (empty($to)) {
+        echo "Usage: sms nr \"text message\"
+";
+        die;
+    }
+
+    // auth call
+    $url = "$baseurl/http/auth?user=$user&password=$password&api_id=$api_id";
+ 
+    // do auth call
+    $ret = file($url);
+ 
+    // explode our response. return string is on first line of the data returned
+    $sess = explode(":",$ret[0]);
+    if ($sess[0] == "OK") {
+ 
+        $sess_id = trim($sess[1]); // remove any whitespace
+        $url = "$baseurl/http/sendmsg?session_id=$sess_id&to=$to&from=$from&text=$text";
+ 
+        // do sendmsg call
+        $ret = file($url);
+        $send = explode(":",$ret[0]);
+ 
+        if ($send[0] == "ID") {
+            echo "Message sent, ID:". $send[1];
+        } else {
+            echo "Send message failed";
+        }
+    } else {
+        echo "Authentication failure:". $ret[0];
+    }
+    echo "
+";
+?>
